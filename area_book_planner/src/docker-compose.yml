@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: abp_postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: abp_db
+      POSTGRES_USER: marktsai
+      POSTGRES_PASSWORD: Aabb115599!
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    volumes: []
+    ports:
+      - "8004:8000"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
