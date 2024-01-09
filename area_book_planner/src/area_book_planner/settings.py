@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'users',
     'quest',
     'graphene_django',
+    'people',
+    'debug_toolbar',
 ]
 
 GRAPHENE = {
@@ -48,6 +50,7 @@ GRAPHENE = {
 }
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,6 +58,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 ROOT_URLCONF = 'area_book_planner.urls'
@@ -84,11 +91,11 @@ WSGI_APPLICATION = 'area_book_planner.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'for_abp',
-        'USER': 'marktaylortsai',
-        'PASSWORD': 'Aabb115599!',
-        'HOST': 'localhost',
-        'PORT': '5439'
+        'NAME': 'abp_db',
+        'USER': 'marktsai',
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD_DOCKER'),
+        'HOST': 'abp_postgres',
+        'PORT': '5432'
     }
 }
 
